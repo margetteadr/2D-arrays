@@ -1,0 +1,137 @@
+package extensions;
+
+import java.util.Scanner;
+
+public class GridAnalyzer {
+    static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+
+int[][] grid = new int[6][6];
+
+fillGrid(grid);
+frequency(grid);
+
+
+    }
+
+    public static void printGrid(int[][] grid) {
+        System.out.println("The 6x6 grid is:");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void fillGrid(int[][] grid) {
+        System.out.println("Enter the values for the 6x6 grid:");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                System.out.print("Enter value for position [" + i + "][" + j + "]: ");
+                grid[i][j] = scanner.nextInt();
+            }
+        }
+    } 
+    public static void displayGrid(int[][] grid) {
+        System.out.println("The 6x6 grid is:");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+        }
+            }
+
+            public static void rowColumnSums(int[][] grid) {
+
+                int[] rowSums = new int[grid.length];
+                int[] columnSums = new int[grid[0].length]; 
+            
+
+                for (int i = 0; i < grid.length; i++) {
+                    for (int j = 0; j < grid[i].length; j++) {
+                        rowSums[i] += grid[i][j];
+                        columnSums[j] += grid[i][j];
+                    }
+                }
+                System.out.println("Row sums:");
+                for (int i = 0; i < rowSums.length; i++) {
+                    System.out.print(rowSums[i] + " ");
+                }
+                System.out.println();
+                System.out.println("Column sums:");
+                for (int j = 0; j < columnSums.length; j++) {
+                    System.out.print(columnSums[j] + " ");
+                }
+                System.out.println();
+            }
+        
+            public static void MaxMin(int[][] grid) {
+                int max = grid[0][0];
+                int min = grid[0][0];
+
+                int maxRow = 0; int maxCol = 0;
+                int minRow = 0; int minCol = 0;
+            
+                for (int i = 0; i < grid.length; i++) {
+                    for (int j = 0; j < grid[i].length; j++) {
+                        if (grid[i][j] > max) {
+                            max = grid[i][j];
+                            maxRow = i;
+                            maxCol = j;
+                        }
+                        if (grid[i][j] < min) {
+                            min = grid[i][j];
+                            minRow = i;
+                            minCol = j;
+                        }
+                    }
+                }
+                System.out.println("Maximum value in the grid: " + max + " at position [" + maxRow + "][" + maxCol + "]");
+                System.out.println("Minimum value in the grid: " + min + " at position [" + minRow + "][" + minCol + "]");
+            }
+
+            public static void frequency(int[][] grid) {
+                
+                System.out.println("Enter a value to find its frequency in the grid:");
+                int value = scanner.nextInt();
+
+                System.out.println("Enter threshold: ");
+                int threshold = scanner.nextInt();
+
+                int countTarget = 0;
+                int countGreater = 0;
+
+                for (int i = 0; i < grid.length; i++) {
+                    for (int j = 0; j < grid[i].length; j++) {
+                        if (grid[i][j] == value) {
+                            countTarget++;
+                        }
+                        if (grid[i][j] > threshold) {
+                            countGreater++;
+                        }
+                    }
+                }
+                System.out.println("Occurences of " + value + ": " + countTarget);
+                System.out.println("Values greater than " + threshold + ": " + countGreater);
+            }
+        public static void patternDetection(int[][] grid) {
+
+            boolean found = false;
+            for (int i = 0; i < grid.length; i++) {
+                boolean increasing = true;
+                for (int j = 0; j < grid[i].length - 1; j++) {
+                    if (grid[i][j] >= grid[i][j + 1]) {
+                        increasing = false;
+                        break;
+                    }
+                }
+                if (increasing) {
+                    System.out.println("Row " + i + " is strictly increasing.");
+                    found = true;
+                }
+            }
+            if (!found) {
+                System.out.println("No strictly increasing rows found.");
+            }
+        }
